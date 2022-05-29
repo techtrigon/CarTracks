@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Data Analysis | Dashboard
+{% endblock title %}
+
+
+
+{% block home %}
+
+   {% comment %} <img  src="{% static '\img\dboard.png' %}"/> {% endcomment %}
+   <h1 style=';color:white;font-weight:300;background-color:purple;width:30%;margin:30px 0;padding: 10px  30px;border-radius: 0 7px 7px 0;' >Dashboard
+   </h1>
+
+<h5 style='color:white;margin:20px 35px 0'>Car Sales in 2022 &#8680 {{tsales22|intcomma}}  
+</h5>
+<h5 style='color:white;margin:10px 35px 0'>Car Sales in 2021 &#8680 {{tsales21|intcomma}}  
+</h5>
+
+{% comment %} CARDS {% endcomment %}
+
+<div style="display: flex;flex-wrap:wrap">
+   <div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(255, 0, 76);color: white;">
+      <h5 class="card-title">Overall Sales Growth rate (2021-2022) </h5>
+      <p class="card-text" >{{growthrate}} %</p>
+      <h5 class="card-title">Costliest Car Price</h5>
+      <p class="card-text" >Rs {{eprice|intcomma}}</p>
+      <h5 class="card-title">CheapestCar Price</h5>
+      <p class="card-text" >Rs {{cprice|intcomma}}</p>
+   </div>
+   <div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(255, 0, 76);color: white;">
+      <h5 class="card-title">Most popular Engine size by sales 2022</h5>
+      <p class="card-text" > {{avgdisp22.1}} cc &emsp;{{avgdisp22.0|intcomma}} ({{avgdisp22.2}})% </p>
+      <h5 class="card-title">Highest Engine size</h5>
+      <p class="card-text" >{{hdis|intcomma}} cc</p>
+      <h5 class="card-title">Lowest Engine size</h5>
+      <p class="card-text" >{{ldis|intcomma}} cc</p>
+</div>
+<div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(255, 0, 76);color: white;">
+      <h5 class="card-title">Most Popular Mileage by Sales 2022</h5>
+      <p class="card-text" >{{avgmile22|intcomma}} km/litre</p>
+      <h5 class="card-title">Maximum Mileage </h5>
+      <p class="card-text" >{{maxmile22|intcomma}} km/litre</p>
+      <h5 class="card-title">Minimum Mileage </h5>
+      <p class="card-text" >{{minmile22|intcomma}} km/litre</p>
+</div>
+<div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(255, 0, 76);color: white;">
+   <h5 class="card-title">Emission norms Ranking by Brand Availability</h5>
+   <p class="card-text" > {{bs.0.1}} &emsp; {{bs.0.0|intcomma}} ({{bs1.0}})% </p>
+   <p class="card-text" > {{bs.1.1}} &emsp; {{bs.1.0|intcomma}} ({{bs1.1}})% </p>
+   <p class="card-text" > {{bs.2.1}} &emsp; {{bs.2.0|intcomma}} ({{bs1.2}})% </p>
+</div>
+<div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(19, 153, 41);color: white;">
+   <h5 class="card-title">Power Steering rankings by Total Sales 2022</h5>
+   {% for i in pst22 %}
+   <p class="card-text" >{{i.1}}&nbsp;{{i.0|intcomma }} ({{i.2}})% </p>
+   {% endfor %}
+</div>
+<div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(19, 153, 41);color: white;">
+   <h5 class="card-title">Popular Body Type by Total Sales 2022</h5>
+   {% with bdtype22|first as b%}
+   <p class="card-text" > {{b.1}} &emsp; {{b.0|intcomma}} ({{b.2}})% </p>
+   {% endwith %}
+   <p class="card-text" > {{bdtype22.1.1}} &emsp; {{bdtype22.1.0|intcomma}} ({{bdtype22.1.2}})% </p>
+   <p class="card-text" > {{bdtype22.2.1}} &emsp; {{bdtype22.2.0|intcomma}} ({{bdtype22.2.2}})% </p>
+   <h5 class="card-title">Least popular Body Type by Total Sales 2022</h5>
+   {% with bdtype22|last as b%}
+   <p class="card-text" > {{b.1}} &emsp; {{b.0|intcomma}} ({{b.2}})% </p>
+   {% endwith %}
+</div>
+<div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(19, 153, 41);color: white;">
+   <h5 class="card-title">Popular Front Suspension by Total Sales 2022</h5>
+   <p class="card-text" > {{fs22.0.1}} &emsp; {{fs22.0.0|intcomma}} ({{fs22.0.2}})% </p>
+   <p class="card-text" > {{fs22.1.1}} &emsp; {{fs22.1.0|intcomma}} ({{fs22.1.2}})% </p>
+   <h5 class="card-title">Least popular Front Suspension </h5>
+   <p class="card-text" > {{fs22.2.1}} &emsp; {{fs22.2.0|intcomma}} ({{fs22.2.2}})% </p>
+</div>
+
+<div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(19, 153, 41);color: white;">
+      <h5 class="card-title">Front Brakes rankings by Total Sales 2022</h5>
+      {% for i in fbrtype22 %}
+      <p class="card-text" >{{i.1}} {{i.0|intcomma }} ({{i.2}})% </p>
+      {% endfor %}
+   </div>
+   
+   <div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(0, 119, 255);color: white;">
+      <h5 class="card-title">Rear Brakes rankings by Total Sales 2022</h5>
+      {% for i in rbrtype22 %}
+      <p class="card-text" >{{i.1}} {{i.0|intcomma }} ({{i.2}})% </p>
+      {% endfor %}
+   </div>
+   <div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(0, 119, 255);color: white;">
+      <h5 class="card-title">Emission norms rankings by Total Sales 2022</h5>
+      {% for i in entype22 %}
+      <p class="card-text" >{{i.1}} {{i.0|intcomma }} ({{i.2}})% </p>
+      {% endfor %}
+   </div>
+   <div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(0, 119, 255);color: white;">
+      <h5 class="card-title">Most popular Color by Total Sales 2022</h5>
+      <p class="card-text" >{{tecolor.1}} &nbsp; {{tecolor.0|intcomma }} ({{tecolor.2}})%</p>
+      <h5 class="card-title">Least popular Color by Total Sales 2022</h5>
+      <p class="card-text" >{{tccolor.1}} &nbsp; {{tccolor.0|intcomma }} ({{tccolor.2}})%</p>
+   </div>
+   <div class="card-body" style="max-width: 19rem;margin:35px;border-radius:8px;box-shadow: 0 0 18px 4px rgb(0, 0, 0);background-color: #292929;border:3px solid rgb(0, 119, 255);color: white;">
+      <h5 class="card-title">Popular States by Total Sales 2022</h5>
+      <p class="card-text" > {{statesale22.0.1}} &emsp; {{statesale22.0.0|intcomma}} ({{statesale22.0.2}})% </p>
+      <p class="card-text" > {{statesale22.1.1}} &emsp; {{statesale22.1.0|intcomma}} ({{statesale22.1.2}})% </p>
+      <h5 class="card-title">Least popular State </h5>
+      <p class="card-text" > {{statesale22.2.1}} &emsp; {{statesale22.2.0|intcomma}} ({{statesale22.2.2}})% </p>
+   </div>
+   
+
+   
+   
+
+   
+   
+   
+</div>   
+
+<div class='dline'>
+</div>
+
+<div style='color:white'>
+   {{makesales22|safe}}
+</div>
+
+<div class='dline'>
+</div>
+
+
+   {% comment %} CARDS above {% endcomment %}
+
+  <p class='p1'>
+   The Indian automobile industry – comprising of the automobile and the automotive components segments – is one of the key drivers of economic growth of India. Being deeply integrated with other industrial sectors, it is a major driver of the manufacturing gross domestic product (GDP), exports, and employment. This sector has grown on account of its traditional strengths in casting, forging and precision machining, fabricating (welding, grinding, and polishing) and cost advantages (on account of availability of abundant low-cost skilled labor), and significant foreign direct investment (FDI) inflows.
+<br>
+<br>
+India was the sixth largest producer of automobiles globally with an average annual production of about 29 million vehicles in 2017–2018, of which about 4 million were exported.India is the largest tractor manufacturer, second largest two-wheeler manufacturer, second largest bus manufacturer, fifth largest heavy truck manufacturer, sixth largest car manufacturer, and eighth largest commercial vehicle manufacturer. The contribution of this sector to GDP has increased from 2.77% in 1992–1993 to about 7.1% now and accounts for about 49% of manufacturing GDP (2015–2016).It employs more than 29 million people (direct and indirect employment). The turnover of the automobile industry is approximately US$ 67 billion (2016–2017) and that of the component industry is US$ 43.5 billion (2015–2016).As per the OICA statistics, the Indian industry accounted for 4.92% of vehicle production globally in 2017 (5.38% of production in the car segment and 3.48% of production in the commercial vehicle segment)
+<br>
+<br>
+Till the 1980s, the commercial vehicles were the second largest segment (after two-wheelers) holding around 20% share in production. After the mid-1980s, passenger vehicles emerged as the second dominant segment, increasing its share from 7% in 1985–1986 to around 15% in 2011–2012 and 14% in 2015–2016. Sales of passenger cars touched 1.2 million units in 2006 and 3 million units in 2016–2017 to maintain the second largest market share in the industry.
+India is a prime destination for many multinational automobile companies with aspirations of business expansion in Asia. It attracted about US$ 14.48 billion (5.2% of total) in cumulative FDI equity inflows between 2000 and 2015.The basic advantages that the country provides as an investment destination include cost-effectiveness of operations, efficient manpower, and a fast-growing dynamic market. In the past, major investments have come from Japan, Italy, and the USA followed by Mauritius and Netherlands. The industry manufactures a wide range of products to meet both domestic and international demands. 
+<br>
+   Till the 1980s, the commercial vehicles were the second largest segment (after two-wheelers) holding around 20% share in production. After the mid-1980s, passenger vehicles emerged as the second dominant segment, increasing its share from 7% in 1985–1986 to around 15% in 2011–2012 and 14% in 2015–2016. Sales of passenger cars touched 1.2 million units in 2006 and 3 million units in 2016–2017 to maintain the second largest market share in the industry.
+  </p> 
+
+
+
+
+{% comment %} <script>
+
+   
+</script> {% endcomment %}
+
+{% endblock home %}

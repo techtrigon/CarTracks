@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+
+{% block title %}
+Data Analysis Explore | Intuitive | Elegant
+{% endblock title %}
+
+{% block home %}
+
+
+
+<div style='margin-left:20px;margin-top:35px' id='f1' class='dfig'>
+   {{ f1|safe }}
+   </div>
+
+   <div class='dline'>
+   </div>
+   
+   <div   style='margin-left:20px' class='dfig'>
+      {{ f2|safe }}
+   </div>
+   <div class='dline'>
+   </div>
+
+   <div   style='margin-left:20px' class='dfig'>
+      {{ f3|safe }}
+   </div>
+
+   <div class='dline'>
+   </div>
+
+   <div   style='margin-left:20px' class='dfig'>
+   {{ f4|safe }}
+   </div>
+   <div class='dline'>
+   </div>
+   <div  style='margin-left:20px' class='dfig'>
+   {{ f5|safe }}
+   </div>
+   <div class='dline'>
+   </div>
+   <div   style='margin-left:20px' class='dfig'>
+   {{ f6|safe }}
+   </div>
+   
+
+
+
+
+
+{% endblock home %}
