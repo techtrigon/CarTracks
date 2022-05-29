@@ -17,3 +17,5 @@
 9-  In case the database link in the site wants username ans password then type 
              username = dev
              password = engage34
+             
+10- "web.py" file inside the graph folder is where calculations are performed 
