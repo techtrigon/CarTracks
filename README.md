@@ -1,4 +1,4 @@
-**CarTracks**
+# CarTracks
 
 # Car Sales Data Analysis Website
 
@@ -13,7 +13,7 @@ Welcome to the Car Sales Data Analysis Website! This Django-based web applicatio
 **User-Friendly Interface:** The website is designed with a clean and intuitive user interface to ensure ease of use.
 
 
-**INSTRUCTIONS** ------------------------------------------------------------------------------------
+## INSTRUCTIONS ------------------------------------------------------------------------------------
 
 1-  Download the zip and extract the folder
 
