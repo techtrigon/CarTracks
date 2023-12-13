@@ -1,3 +1,20 @@
+**CarTracks**
+
+# Car Sales Data Analysis Website
+
+Welcome to the Car Sales Data Analysis Website! This Django-based web application allows users to upload car sales data files, perform calculations, and visualize the results through interactive charts, pie charts, histograms, and other intuitive graphical representations.
+
+## Features
+
+**Data Analysis:** Perform calculations and statistical analysis on the uploaded car sales data.
+
+**Interactive Visualizations:** View the analyzed data in graphical formats such as charts, pie charts, and histograms for better insights.
+
+**User-Friendly Interface:** The website is designed with a clean and intuitive user interface to ensure ease of use.
+
+
+**INSTRUCTIONS** ------------------------------------------------------------------------------------
+
 1-  Download the zip and extract the folder
 
 2-  Open the folder and right click and open terminal there as administartor
